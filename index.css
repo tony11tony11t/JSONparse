@@ -1,0 +1,55 @@
+body{
+    background-color: #EEEEEE;
+    margin: 0;
+    padding: 0;
+}
+h2{
+    color:black;
+    margin: 0;
+}
+#main{
+    background-color: #ffffff;
+    padding: 1rem;
+    border-collapse: collapse;
+    font-size: .8rem;
+}
+.title{
+    background-color: #ffffff;
+    padding: 2rem;
+    box-shadow: rgba(0,0,0,0.2) 2px 2px 5px ;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+.table{
+    padding: 2rem;
+    margin-top: 6rem;
+}
+#main{
+    box-shadow: rgba(0,0,0,0.2) 2px 2px 5px ;
+    margin: auto;
+}
+#main th{
+    white-space: nowrap;
+    padding : .6rem
+}
+#main td{
+    border-right: 1px solid #DDDDDD;
+    padding : .6rem 1rem;
+    min-width: 4rem
+}
+#main td.group{
+    font-weight: 600;
+    background-color: #fdf1c7;
+    font-size: 1rem;
+}
+#main td.number{
+    text-align: right;
+    min-width: 3rem
+}
+#main td.textarea{
+    min-width: 20rem;
+}
+#main td.boolean{
+    text-align: center;
+}
