@@ -7,9 +7,29 @@ h2{
     color:black;
     margin: 0;
 }
-h1{
-    margin : 1rem;
+h3{
     color: crimson;
+    width: fit-content;
+    margin: 0;
+    
+}
+h3 label:hover{
+    color: dodgerblue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.upload{
+    
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+.upload img{
+    width: 64px;
+    height: 64px;
+    cursor: pointer;
+    box-shadow: rgba(0,0,0,0.2) 4px 4px 8px;
+    border-radius: 999px;
 }
 #main{
     background-color: #ffffff;
@@ -26,7 +46,7 @@ h1{
     top: 0;
 }
 .table{
-    padding: 2rem;
+    padding: 2rem 4rem;
     margin-top: 6rem;
     width: fit-content;
 }
@@ -57,4 +77,9 @@ h1{
 }
 #main td.boolean{
     text-align: center;
+}
+.default{
+    text-align: center;
+    color: #A8A8A8;
+    font-size: 1rem;
 }

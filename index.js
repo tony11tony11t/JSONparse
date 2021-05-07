@@ -2,25 +2,62 @@
 let table = document.getElementById("main");
 let tbody = table.querySelector("tbody");
 let url = window.location.search.split("url=")[1];
-let csvText = "姓名,入會日期,介紹人,關係,居住地,職業,原因,付費學員,一般點名次數,特殊點名次數,總點名次數\n";
+let jsonText = "";
 
 var xhr = new XMLHttpRequest();
 xhr.open("GET", url);
 xhr.onload = e => {
-    let data = null;
 
-    try{
-         data = JSON.parse(e.target.responseText);
-    }catch{
-        table.innerHTML = "<h1>無效網頁，請確認連結是否正確</h1>";
+    if(url != undefined){
+        showData(e.target.responseText);
+        jsonText = e.target.responseText;
+
+        let fileName = () => {
+            let date = new Date();
+            let y    = date.getFullYear();
+            let m    = date.getMonth() + 1;
+            let d    = date.getDate();
+            return `${y}-${m}-${d}`;
+        }
+    
+        // Start file download.
+        download(`${fileName()}.json`,jsonText);
     }
+    
+
+    
+}
+xhr.send(null);
+
+document.getElementById("file-uploader").addEventListener("change" , e => {
+    var reader = new FileReader();
+    reader.readAsText(e.target.files[0], "UTF-8");
+    reader.onload = e => {
+        showData(e.target.result); 
+    }
+})
 
 
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+}
+
+function showData(data){
+    data = JSON.parse(data);
+    tbody.innerHTML = "";
     Object.keys(data).forEach(k => {
         let tr = `<tr><td colspan="11" class="group">${data[k].name}</td></tr>`;
         tbody.insertAdjacentHTML("beforeend" , tr);
-
-        csvText += data[k].name + "\n";
     
         let students = data[k].student;
         Object.keys(students).forEach(s => {
@@ -38,35 +75,8 @@ xhr.onload = e => {
                         <td class="number">${students[s].specialNum + students[s].normalNum}</td>
                     </tr>`;
             tbody.insertAdjacentHTML("beforeend" , tr);
-
-            csvText += `${students[s].name},${students[s].startDate},${students[s].introducer},${students[s].relationship},${students[s].city},${students[s].career},${students[s].reason.replace(/\n/g,' ')},${students[s].money === "true" ? "O" : ""}, ${students[s].normalNum},${students[s].specialNum},${students[s].specialNum + students[s].normalNum}\n`
         })
     })
-
-    let fileName = () => {
-        let date = new Date();
-        let y    = date.getFullYear();
-        let m    = date.getMonth() + 1;
-        let d    = date.getDate();
-        return `${y}-${m}-${d}`;
-    }
-
-    // Start file download.
-    download(`${fileName()}.csv`,csvText);
-}
-xhr.send(null);
-
-function download(filename, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
-  
-    element.style.display = 'none';
-    document.body.appendChild(element);
-  
-    element.click();
-  
-    document.body.removeChild(element);
 }
 
 
