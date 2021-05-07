@@ -7,6 +7,10 @@ h2{
     color:black;
     margin: 0;
 }
+h1{
+    margin : 1rem;
+    color: crimson;
+}
 #main{
     background-color: #ffffff;
     padding: 1rem;
@@ -24,6 +28,7 @@ h2{
 .table{
     padding: 2rem;
     margin-top: 6rem;
+    width: fit-content;
 }
 #main{
     box-shadow: rgba(0,0,0,0.2) 2px 2px 5px ;
@@ -36,7 +41,7 @@ h2{
 #main td{
     border-right: 1px solid #DDDDDD;
     padding : .6rem 1rem;
-    min-width: 4rem
+    min-width: 4.5rem
 }
 #main td.group{
     font-weight: 600;
