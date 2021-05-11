@@ -59,6 +59,8 @@ function showData(data){
     Object.keys(data).forEach(k => {
         let tr = `<tr><td colspan="11" class="group">${data[k].name}</td></tr>`;
         tbody.insertAdjacentHTML("beforeend" , tr);
+
+        csvText += data[k].name + "\n";
     
         let students = data[k].student;
         Object.keys(students).forEach(s => {
@@ -77,7 +79,6 @@ function showData(data){
                     </tr>`;
             tbody.insertAdjacentHTML("beforeend" , tr);
 
-            csvText += data[k].name + "\n";
             csvText += `${students[s].name},${students[s].startDate},${students[s].introducer},${students[s].relationship},${students[s].city},${students[s].career},${students[s].reason.replace(/\n/g,' ')},${students[s].money === "true" ? "O" : ""}, ${students[s].normalNum},${students[s].specialNum},${students[s].specialNum + students[s].normalNum}\n`
         })
     })
