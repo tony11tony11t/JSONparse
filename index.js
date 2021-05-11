@@ -3,6 +3,7 @@ let table = document.getElementById("main");
 let tbody = table.querySelector("tbody");
 let url = window.location.search.split("url=")[1];
 let jsonText = "";
+let csvText  = "姓名,入會日期,介紹人,關係,居住地,職業,原因,付費學員,一般點名次數,特殊點名次數,總點名次數\n";
 
 var xhr = new XMLHttpRequest();
 xhr.open("GET", url);
@@ -21,7 +22,7 @@ xhr.onload = e => {
         }
     
         // Start file download.
-        download(`${fileName()}.json`,jsonText);
+        download(`${fileName()}.csv`,csvText);
     }
     
 
@@ -75,6 +76,9 @@ function showData(data){
                         <td class="number">${students[s].specialNum + students[s].normalNum}</td>
                     </tr>`;
             tbody.insertAdjacentHTML("beforeend" , tr);
+
+            csvText += data[k].name + "\n";
+            csvText += `${students[s].name},${students[s].startDate},${students[s].introducer},${students[s].relationship},${students[s].city},${students[s].career},${students[s].reason.replace(/\n/g,' ')},${students[s].money === "true" ? "O" : ""}, ${students[s].normalNum},${students[s].specialNum},${students[s].specialNum + students[s].normalNum}\n`
         })
     })
 }
